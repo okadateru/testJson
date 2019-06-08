@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import json
-import requests 
+import requests
+
+import pymysql, os
 
 # response = requests.get("http://api.open-notify.org/iss-pass")
 #print(response.status_code)
