@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'openNotify'
 ]
 
 MIDDLEWARE = [
@@ -80,16 +81,31 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #    }
 #}
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'django',
+#         'USER': 'django',
+#         'PASSWORD': 'django',
+#         'HOST': 'db',
+#         'PORT': 3306,
+#     }
+#     }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django',
-        'USER': 'django',
-        'PASSWORD': 'django',
-        'HOST': 'db',
-        'PORT': 3306,
+        'NAME': 'mysite',
+        'USER': 'mysiteuser',
+        'PASSWORD': 'mysiteuserpass',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'ATOMIC_REQUESTS': True,
+        'OPTIONS': {
+            'sql_mode': 'TRADITIONAL,　NO_AUTO_VALUE_ON_ZERO',
+        },
     }
-    }
+}
 
 
 # Password validation
