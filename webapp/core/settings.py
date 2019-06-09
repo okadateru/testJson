@@ -25,7 +25,7 @@ SECRET_KEY = '&-nok@jac(i$od*4*qz#)43t)!4d)r_g&#hz29(kvl&8px#js_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'openNotify'
 ]
 
 MIDDLEWARE = [
@@ -95,9 +94,9 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ubuntu',
-        'USER': 'ubuntu',
-        'PASSWORD': 'mysiteuserpass',
+        'NAME': 'API_json',
+        'USER': 'okada',
+        'PASSWORD': 'opennotify',
         'HOST': 'localhost',
         'PORT': '3306',
         'ATOMIC_REQUESTS': True,

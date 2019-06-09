@@ -5,7 +5,6 @@ import requests
 
 # import pymysql, os
 
-# response = requests.get("http://api.open-notify.org/iss-pass")
 #print(response.status_code)
 
 parameters = {"lat": 40.71, "lon": -74}
@@ -15,7 +14,11 @@ response = requests.get("http://api.open-notify.org/iss-pass.json", params=param
 print(response.content)
 # This gets the same data as the command aboveresponse = requests.get("http://api.open-notify.org/iss-pass.json?lat=40.71&lon=-74")
 
-#
+data = json.dumps(response.content)
+
+pprint(data)
+
+
 # try:
 # 	json_data = json.loads(response, object_pairs_hook=OrderedDict)
 # except JSONDecodeError:
