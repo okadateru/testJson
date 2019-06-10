@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_mysql',
+    'openNotify',
 ]
 
 MIDDLEWARE = [
@@ -91,18 +93,36 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #     }
 #     }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'API_json',
+#         'USER': 'okada',
+#         'PASSWORD': 'opennotify',
+#         'HOST': 'localhost',
+#         'PORT': '3306',
+#         'ATOMIC_REQUESTS': True,
+#         'OPTIONS': {
+#             'sql_mode': 'TRADITIONAL,　NO_AUTO_VALUE_ON_ZERO',
+#         },
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'API_json',
         'USER': 'okada',
         'PASSWORD': 'opennotify',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'ATOMIC_REQUESTS': True,
         'OPTIONS': {
-            'sql_mode': 'TRADITIONAL,　NO_AUTO_VALUE_ON_ZERO',
+            # Tell MySQLdb to connect with 'utf8mb4' character set
+            'charset': 'utf8mb4',
         },
+        # Tell Django to build the test database with the 'utf8mb4' character set
+        'TEST': {
+            'CHARSET': 'utf8mb4',
+            'COLLATION': 'utf8mb4_unicode_ci',
+        }
     }
 }
 
