@@ -22,20 +22,20 @@ class APIResponse(models.Model):
 
 
 class NewAPIResponse(models.Model):
-    image_path = models.CharField(max_length=255, default=None, verbose_name="イメージパス")
-    success = models.CharField(max_length=255, default=None)
+
     message = models.CharField(max_length=255, default=None)
     latitude = models.DecimalField(max_digits=4, decimal_places=2, default=None)
-    longtitude = models.DecimalField(max_digits=4, decimal_places=1, default=None)
+    longitude = models.DecimalField(max_digits=4, decimal_places=1, default=None)
+    altitude = models.PositiveIntegerField(default=None)
+    datetime = models.PositiveIntegerField(default=None)
     passes = models.IntegerField(default=None)
-    request_timestamp = models.PositiveIntegerField(default=None)
-    response_timestamp = models.PositiveIntegerField(default=None)
+
 
     class Meta:
         db_table = "Newpasstimejson"
 
     def __str__(self):
-        return self.image_path
+        return self.message
 
 
 

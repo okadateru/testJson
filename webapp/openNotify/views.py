@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import APIResponse, NewAPIResponse
 from django.http import HttpResponse
 from django.utils.safestring import mark_safe
-from .forms import APIResponseForm
+# from .forms import APIResponseForm
 
 
 import json
@@ -22,50 +22,63 @@ def storeJson(request):
         a.jsondata=data
         a.save()
 
-    # f = APIResponseForm(request.POST, instance=data)
-    # f.save()
-    # string = json.dumps(data, indent=4)
+    return render(request, 'openNotify/index.html', {'data': data})
 
+
+
+def storeJsonToEachRecord(request):
+    parameters = {"lat": 40.71, "lon": -74}
+    headers = {"content-type": "application/json"}
+    response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters, headers=headers)
+    # data は 辞書型。　(loads()はJSON文字列を辞書型に変換)
+    data = json.loads(response.text)
+
+
+    message = data["message"]
+    latitude = data["request"]["latitude"]
+    longitude = data["request"]["longitude"]
+    passes = data["request"]["passes"]
+    datetime = data["request"]["datetime"]
+    altitude = data["request"]["altitude"]
+
+    items = NewAPIResponse.objects.all()
+    for item in items:
+        item.message = message
+        item.latitude = latitude
+        item.longitude = longitude
+        item.passes = passes
+        item.datetime = datetime
+        item.altitude = altitude
+        item.save()
 
     return render(request, 'openNotify/index.html', {'data': data})
 
 
-# Create your views here.
-#
-# def my_django_view(request):
-#     if request.method == 'POST':
-#         r = requests.post('http://127.0.0.1:8000/api/test/', data=request.POST)
-#     else:
-#         r = requests.get('http://127.0.0.1:8000/api/test/', data=request.GET)
-#
-#     if r.status_code == 201 and request.method == 'POST':
-#         data = r.json()
-#         testsave_attrs = {
-#             "book": data["book"],
-#         }
-#         testsave= T1.objects.create(**testsave_attrs)
-#         return HttpResponse(r.text)
-#     elif r.status_code == 200:  # GET response
-#         return HttpResponse(r.json())
-#     else:
-#         return HttpResponse('Could not save data')
-#
+def ai_analysis_log(request):
+    headers = {"content-type": "application/json"}
+    parameters = {image_path:"/image/d03f1d36ca69348c51aa/c413eac329e1c0d03/test.jpg"}
+    # POSTパラメータは、data引数で指定
+    response = requests.post("http://example.com/", data=parameters, headers=headers)
+    # data は 辞書型。　(loads()はJSON文字列を辞書型に変換)
+    data = json.loads(response.text)
 
-#######
-# def storeJson(request):
-#     if request.POST:
-#         book_form = BookForm(request.POST)
-#     author_form = AuthorForm(request.POST)
-#     if (book_form.is_valid() and author_form.is_valid()):
-#         log.debug("test....")
-#     book = book_form.save()
-#     author = author_form.save()
-#     author.book = book
-#     author.save()
-#
-#     return redirect('/index/')
-#     else:
-#     book_form = BookForm()
-#     author_form = AuthorForm()
-#     return render_to_response('addbook.html', {'form': book_form, 'form': author_form},
-#                               context_instance=RequestContext(request))
+    image_path = data["image_path"]
+    success = data["success"]
+    message = data["message"]
+    Class = data["request"]["Class"]
+    confidence = data["request"]["confidence "]
+    request_timestamp = data["request"]["request_timestamp"]
+    response_timestamp = data["request"]["response_timestamp"]
+
+    items = NewAPIResponse.objects.all()
+    for item in items:
+        item.image_path = image_path
+        item.success = success
+        item.message = message
+        item.Class = Class
+        item.confidence = confidence
+        item.request_timestamp = request_timestamp
+        item.response_timestamp = response_timestamp
+        item.save()
+
+    return render(request,'openNotify/index.html', {'data': data})
