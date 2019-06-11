@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from .models import APIResponse
+from .models import APIResponse, NewAPIResponse
 from django.http import HttpResponse
 from django.utils.safestring import mark_safe
 from .forms import APIResponseForm
+
 
 import json
 import requests
@@ -13,8 +14,14 @@ def storeJson(request):
     parameters = {"lat": 40.71, "lon": -74}
     headers = {"content-type": "application/json"}
     response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters,headers=headers)
-    data = json.loads(response.text) # data は 辞書型
+    data = json.loads(response.text) # data は 辞書型(loads()は文字列を辞書型に変換)
     print(data)
+
+    all_objects = APIResponse.objects.all()
+    for a in all_objects:
+        a.jsondata=data
+        a.save()
+
     # f = APIResponseForm(request.POST, instance=data)
     # f.save()
     # string = json.dumps(data, indent=4)

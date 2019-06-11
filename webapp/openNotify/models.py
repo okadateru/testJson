@@ -2,19 +2,23 @@ from __future__ import unicode_literals
 from django.db import models
 from django_mysql.models import JSONField, Model
 
-# Create your models here.
+import json
 
+# Create your models here.
+def my_default():
+    return {'foo': 'bar'}
 
 class APIResponse(models.Model):
 
     # url = models.CharField(max_length=200)
-    data = JSONField()
+    jsondata = JSONField(default=my_default)
 
     class Meta:
         db_table = "passtimejson"
+    jsondata = str(jsondata)
 
     def __str__(self):
-        return self.data
+        return self.jsondata
 
 
 class NewAPIResponse(models.Model):
@@ -62,3 +66,4 @@ CREATE TABLE `ai_analysis_log` (
   PRIMARY KEY (`id`),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;    
 """
+
