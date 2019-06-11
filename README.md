@@ -1,4 +1,11 @@
-##### API から JSON 取得 
+### [django] API から JSON 取得 
+
+testJson/webapp/openNotify/
+
+urls.py => httpリクエストを受けて、対応するビューを返す
+vews.py =>urls.pyから呼び出されると、処理を行う
+models.py => DBのテーブル定義
+
 
 **http://<ホスト>:8000/fetch/json3/**  
 にアクセスすると
@@ -9,3 +16,9 @@ views.pyの
 http://example.com/<画像パス>
 の画像の分類クラスをJSONで返すAPIからJSONを取得してMySQLに保存
 
+
+**http://<ホスト>:8000/fetch/json2/**
+にアクセスすると　iSS の位置情報を JSON で受け取り、各JSONのバリューを DB内の の適当なフィールド に保存
+
+**http://<ホスト>:8000/fetch/json/**
+にアクセスすると　iSS の位置情報を JSON で受け取り、JSON形式のデータを JSONField DB に保存
