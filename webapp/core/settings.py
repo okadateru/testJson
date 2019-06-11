@@ -25,7 +25,7 @@ SECRET_KEY = '&-nok@jac(i$od*4*qz#)43t)!4d)r_g&#hz29(kvl&8px#js_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_mysql',
-    'openNotify',
+    'openNotify.apps.OpennotifyConfig'
 ]
 
 MIDDLEWARE = [
@@ -116,7 +116,9 @@ DATABASES = {
         'PASSWORD': 'opennotify',
         'OPTIONS': {
             # Tell MySQLdb to connect with 'utf8mb4' character set
-            'charset': 'utf8mb4',
+            # 'charset': 'utf8mb4',
+            'charset': 'utf8',
+            "init_command": "SET default_storage_engine=INNODB",
         },
         # Tell Django to build the test database with the 'utf8mb4' character set
         'TEST': {

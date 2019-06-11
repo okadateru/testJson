@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import APIResponse
+from django.http import HttpResponse
+from django.utils.safestring import mark_safe
+from .forms import APIResponseForm
 
 import json
 import requests
@@ -10,11 +13,14 @@ def storeJson(request):
     parameters = {"lat": 40.71, "lon": -74}
     headers = {"content-type": "application/json"}
     response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters,headers=headers)
-    data = response.json()
-    data.save()
+    data = json.loads(response.text) # data は 辞書型
+    print(data)
+    # f = APIResponseForm(request.POST, instance=data)
+    # f.save()
+    # string = json.dumps(data, indent=4)
 
-    string = print(json.dumps(data, indent=4))
-    return HttpResponse(string)
+
+    return render(request, 'openNotify/index.html', {'data': data})
 
 
 # Create your views here.

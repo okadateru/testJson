@@ -1,11 +1,12 @@
 from django import forms
 from django.forms import ModelForm
-from .models import APIResponse
+from .models import NewAPIResponse
 
 
-class APIresponseForm(ModelForm):
+class APIResponseForm(ModelForm):
 
     class Meta:
-        model = APIResponse
+        model = NewAPIResponse
 
-        fields = ['data']
+        fields = ['success', 'image_path']
+
