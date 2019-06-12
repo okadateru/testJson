@@ -1,13 +1,7 @@
 ### [django] API から JSON 取得 
 
-testJson/webapp　------ core(project) ----- manage.py
-                  |                   ----- settings.py など
-                  |---openNotify(app) ----templates
-                                    | ----models.py
-                                    | ----urls.py
-                                    | ----views.py
-                                    | ----admin.py
-                  
+
+![fileTree](https://github.com/okadateru/testJson/blob/master/file_tree.png)
 
 
 urls.py => httpリクエストを受けて、対応するビューを返す  
