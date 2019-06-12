@@ -39,7 +39,7 @@ class NewAPIResponse(models.Model):
 
 
 
-class ai_analysis_log(models.Model):
+class Ai_analysis_log(models.Model):
     image_path = models.CharField(max_length=255)
     success = models.CharField(max_length=255, default=None)
     message = models.CharField(max_length=255, default=None)
@@ -50,6 +50,9 @@ class ai_analysis_log(models.Model):
 
     class Meta:
         db_table = "ai_analysis_log"
+
+    def __str__(self):
+        return self.image_path
 
 
 """
