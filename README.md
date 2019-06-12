@@ -4,10 +4,10 @@
 ![fileTree](https://github.com/okadateru/testJson/blob/master/file_tree.png)
 
 
-urls.py => httpリクエストを受けて、対応するビューを返す  
-vews.py =>urls.pyから呼び出されると、APIからレスポンスを受けてDBにデータを保存する処理を行う  
-models.py => DBのテーブル定義  
-index.html => 受信した HTML を表示  
+**urls.py**    =>  httpリクエストを受けて、対応するビューを返す  
+**vews.py**    =>  urls.pyから呼び出されると、APIからレスポンスを受けてDBにデータを保存する処理を行う  
+**models.py**  =>  DBのテーブル定義  
+**index.html** =>  受信した HTML を表示  
 
 **http://<ホスト>:8000/fetch/json3/**  
 にアクセスすると
