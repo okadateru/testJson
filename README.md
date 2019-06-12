@@ -1,6 +1,14 @@
 ### [django] API から JSON 取得 
 
-testJson/webapp/openNotify/
+testJson/webapp　------ core(project) ----- manage.py
+                  |                   ----- settings.py など
+                  |---openNotify(app) ----templates
+                                    | ----models.py
+                                    | ----urls.py
+                                    | ----views.py
+                                    | ----admin.py
+                  
+
 
 urls.py => httpリクエストを受けて、対応するビューを返す  
 vews.py =>urls.pyから呼び出されると、APIからレスポンスを受けてDBにデータを保存する処理を行う  
